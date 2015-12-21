@@ -25,9 +25,16 @@ class JobsController < ApplicationController
   end
 
   def update
+  	if @job.update_attributes(job_params)
+  		redirect_to job_path(@job)
+  	else
+  		redirect_to edit_job_path
+  	end
   end
 
   def destroy
+  	@job.destroy
+  	redirect_to jobs_path
   end
 
 private

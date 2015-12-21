@@ -4,3 +4,5 @@
 <%= link_to "Job Link", @job.url %>
 <br>
 <%= link_to "Home", jobs_path %>
+<%= link_to "Edit", edit_job_path(@job) %>
+<%= link_to "Delete", @job, method: :delete, data: {confirm: "Are You Sure?"} %>
