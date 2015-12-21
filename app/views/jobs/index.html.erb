@@ -1,3 +1,7 @@
+<%= link_to "All Job", jobs_path %>
+<% Category.all.each do |category| %>
+	<%= link_to category.name, jobs_path(category: category.name) %>
+<% end  %>
 <h1 class="text-center">All Jobs</h1>
 <% @jobs.each do |job| %>
   <h3><%= link_to job.title, job_path(job) %></h3>
