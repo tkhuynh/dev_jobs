@@ -8,6 +8,8 @@
 				</div>
 				<div class="form-group">
 					<%= f.label :category_id  %>
+					<!-- dropdown list -->
+					<!-- see f.collection_select http://guides.rubyonrails.org/form_helpers.html -->
 					<%= f.collection_select :category_id, Category.all, :id, :name, {prompt: "Choose a Category"}, class: "form-control dropdown-toggle", autofocus: true %>
 				</div>
 				<div class="form-group">
@@ -23,10 +25,11 @@
 					<%= f.text_field :url, class: "form-control", autofocus: true %>
 				</div>
 				<div class="form-group">
-					<%= f.submit "Post", class: "btn btn-success" %>
+					<%= f.submit "Post", class: "btn btn-default job_form_button" %>
+					<%= link_to "Cancel", jobs_path, class: "btn btn-default job_form_button" %>
 				</div>
 			<% end %>
-			<%= link_to "Home", jobs_path %>
+			
 		</div>
 	</div>
 </div>

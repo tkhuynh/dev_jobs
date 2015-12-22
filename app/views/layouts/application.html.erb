@@ -7,8 +7,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to "DevJobs", jobs_path, class: "navbar-brand" %>
+      </div>
 
-	<div class="containter-fluid">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "All Jobs", jobs_path %></li>
+					<% Category.all.each do |category| %>
+						<!-- loop to each category -->
+						<!-- sample url http://localhost:3000/jobs?category=Full+Time -->
+						<li><%= link_to category.name, jobs_path(category: category.name) %></li>
+					<% end  %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%=  link_to "Add Job", new_job_path %></li>
+      </div>
+    </div>
+  </nav>
+
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 				<%= yield %>

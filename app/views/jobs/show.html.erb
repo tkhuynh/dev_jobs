@@ -1,8 +1,9 @@
 <h2><%= @job.title %></h2>
+<p><i><%= @job.category.name %></i></p>
 <h4>Company: <%= @job.company %></h4>
 <p>Job Description: <%= @job.description %></p>
-<%= link_to "Job Link", @job.url %>
-<br>
-<%= link_to "Home", jobs_path %>
-<%= link_to "Edit", edit_job_path(@job) %>
-<%= link_to "Delete", @job, method: :delete, data: {confirm: "Are You Sure?"} %>
+<%= link_to "Apply for Job", @job.url, class: "btn btn-default" %>
+<hr>
+<%= link_to "Home", jobs_path, class: "btn btn-default three-button-group" %>
+<%= link_to "Edit", edit_job_path(@job), class: "btn btn-default three-button-group" %>
+<%= link_to "Delete", @job, method: :delete, data: {confirm: "Are You Sure?"}, class: "btn btn-default three-button-group" %>

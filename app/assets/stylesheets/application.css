@@ -14,3 +14,22 @@
  *= require_tree .
  *= require_self
  */
+body {
+	background-color: #1B7735;
+	font-family: "Lato", sans-serif;
+}
+
+.navbar-default {
+	height: 75px;
+	border-radius: 0px;
+}
+
+.navbar-default .navbar-brand {
+	font-size: 25px;
+  margin-top: 10px;
+}
+
+.navbar-nav>li>a {
+	margin-top: 10px;
+	font-size: 15px;
+}

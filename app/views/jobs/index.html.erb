@@ -1,11 +1,21 @@
-<%= link_to "All Job", jobs_path %>
-<% Category.all.each do |category| %>
-	<%= link_to category.name, jobs_path(category: category.name) %>
-<% end  %>
-<h1 class="text-center">All Jobs</h1>
-<% @jobs.each do |job| %>
-  <h3><%= link_to job.title, job_path(job) %></h3>
-	<h4><%= job.company %></h4>
-<% end %>
+<div class="text-center">
+	<% if !@category_id %> 
+		<!-- show "All Jobs" as title if All Job clicked -->
+		<h1>Job Buletin</h1>
+	<% else  %>
+		<!-- show category job as title -->
+		<h1><%=  Category.find(@category_id).name %> Jobs</h1>
+	<% end %>
+		
+</div>
 
-<%= link_to "New Job", new_job_path %>
+<% if @jobs.any? %>
+	<% @jobs.each do |job| %>
+	  <h3><%= link_to job.title, job_path(job), class: "index_job_title" %></h3>
+	  <p><i><%= job.category.name %></i></p>
+		<h5><strong>Company: </strong><%= job.company %></h5>
+		<hr>
+	<% end %>
+<% else %>
+	<h3 class="text-center">There aren't any <%=  Category.find(@category_id).name %> jobs posted yet!</h3>
+<% end %>

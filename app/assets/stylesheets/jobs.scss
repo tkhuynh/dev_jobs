@@ -1,3 +1,20 @@
 // Place all the styles related to the jobs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.three-button-group, .job_form_button {
+	width: 68px;
+	margin-right: 5px;
+}
+
+
+h1, h2, h3, h4, h5, p, .index_job_title {
+	color: white;
+}
+.new_job_link {
+	font-size: 20px;
+}
+
+.index_job_title:hover {
+	color: white;
+}
