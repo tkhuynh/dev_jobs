@@ -22,6 +22,7 @@ class JobsController < ApplicationController
     if current_user
       @job = Job.new
     else
+      flash[:error] = "Please log in to post a job."
       redirect_to login_path
     end
   end
@@ -31,8 +32,10 @@ class JobsController < ApplicationController
     if current_user
     	@job = current_user.jobs.new(job_params)
     	if @job.save
+        flash[:notice] = "New job is sucessfully posted."
     		redirect_to job_path(@job)
     	else
+        flash[:error] = @job.errors.full_messages.join(', ')
     		redirect_to new_job_path
     	end
     else
@@ -43,6 +46,7 @@ class JobsController < ApplicationController
   def edit
     #prevent non logged in user to see edit job form
     unless current_user == @job.user
+      flash[:error] = "You can't edit other user's posted job."
       redirect_to job_path(@job)
     end
   end
@@ -51,8 +55,10 @@ class JobsController < ApplicationController
     #prevent non logged in user to edit job
     if current_user == @job.user
     	if @job.update_attributes(job_params)
+        flash[:notice] = "Sucessfully "
     		redirect_to job_path(@job)
     	else
+        flash[:error] = @job.errors.full_messages.join(', ')
     		redirect_to edit_job_path
     	end
     else

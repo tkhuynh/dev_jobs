@@ -1,8 +1,16 @@
-<% if current_user %>
+<% if current_user == @user %>
+	<!-- show "Hello, " with user first name if current user see his own profile -->
 	<h2>Hello, <%= @user.first_name.titleize %></h2>
 <% else %>
+	<!-- do not show "Hello, " when current user look at other user's profile -->
 	<h2><%= @user.first_name.titleize %> <%= @user.last_name.titleize %></h2>
 <% end %>
-<h4><strong>Email: </strong><%= @user.email %></h4>
-<%=  link_to "Edit Profile", edit_user_path(@user), class: "btn btn-default" %>
-<%=  link_to "Delete Profile", @user, method: :delete, class: "btn btn-default" %>
+<h4><strong>Email: </strong><%= mail_to @user.email, nil, class: "mail_to" %></h4>
+<hr>
+<%= link_to "Home", jobs_path, class: "btn btn-default" %>
+
+<% if current_user == @user %> 
+	<!-- only show Edit and Delete button in current user file -->
+	<%=  link_to "Edit Profile", edit_user_path(@user), class: "btn btn-default" %>
+	<%=  link_to "Delete Profile", @user, method: :delete, class: "btn btn-default" %>
+<% end %>

@@ -15,21 +15,40 @@
  *= require_self
  */
 body {
-	background-color: #1B7735;
+	background-color: #287f3e;
 	font-family: "Lato", sans-serif;
 }
 
 .navbar-default {
 	height: 75px;
 	border-radius: 0px;
+	margin-bottom: 0px;
 }
 
 .navbar-default .navbar-brand {
 	font-size: 25px;
   margin-top: 10px;
+  color: #70d187;
 }
 
-.navbar-nav>li>a {
+.navbar-default .navbar-nav>li>a {
 	margin-top: 10px;
 	font-size: 15px;
+	color: #70d187;
+}
+
+.alert-danger, .alert-info {
+	border-radius: 0px;
+}
+
+label {
+	color: white;
+}
+
+.user_login_form p, .user_signup_form p {
+	font-size: 18px;
+}
+
+.user_login_form a, .user_signup_form a, .post_user_name, .learn_more, .mail_to {
+	color: #70d187;
 }
