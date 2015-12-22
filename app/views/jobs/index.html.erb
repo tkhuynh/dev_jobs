@@ -10,7 +10,7 @@
 	</div>
 	<% @jobs.each do |job| %>
 	  <h3><%= link_to job.title, job_path(job), class: "index_job_title" %></h3>
-	  <p><i><%= job.category.name %></i></p>
+	  <p><i><%= job.category.name %> - Posted by: <%= link_to User.find(job.user_id).first_name, user_path(User.find(job.user_id)) %> (<%= time_ago_in_words(job.created_at) %> ago)</i></p>
 		<h5><strong>Company: </strong><%= job.company %></h5>
 		<hr>
 	<% end %>
