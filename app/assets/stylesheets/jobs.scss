@@ -18,3 +18,12 @@ h1, h2, h3, h4, h5, p, .index_job_title {
 .index_job_title:hover {
 	color: white;
 }
+
+.pagination>.active>span, .pagination>.active>span:hover {
+	background-color: #70d187;
+	border-color: #70d187;
+}
+
+.pagination>li>a, .pagination>li>span {
+	color:  #287f3e;
+}

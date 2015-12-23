@@ -22,4 +22,8 @@
 	<h2 class="text-center">There aren't any jobs posted yet!</h2>
 <% end %>
 
+<div class="pagination_holder text-center">
+	<%= will_paginate @jobs, renderer: BootstrapPagination::Rails %>
+</div>
+
 
