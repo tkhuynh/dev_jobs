@@ -1,3 +1,13 @@
+<% if @search %>
+	<h1 class="text-center">Indeed Search Result</h1>
+	<% @jobs.each do |job| %>
+		<h3><%=  job.job_title %></h3>
+		<h5><strong>Company: </strong><%= job.company %> - <%=  job.formatted_location_full %></h5>
+		<h5>Posted: <%= time_ago_in_words(job.date) %> ago.</h5>
+		<h5><strong>Description Snippet: </strong><%= job.snippet %>... <%= link_to "learn more", job.url , class: "learn_more" %>.</h5>
+		<hr>
+	<% end %>
+<% else %>
 	<div class="text-center">
 		<% if !@category_id %> 
 			<!-- show "All Jobs" as title if All Job clicked -->
@@ -7,23 +17,38 @@
 			<h1><%=  Category.find(@category_id).name %> Jobs</h1>
 		<% end %>
 	</div>
-<% if @jobs.any? %>
-	<!-- if there are any job posted belong to this catetory, list them -->
-	<% @jobs.each do |job| %>
-	  <h3><%= link_to job.title, job_path(job), class: "index_job_title" %></h3>
-	  <p><i><%= job.category.name %> - Posted by: <%= link_to User.find(job.user_id).first_name, user_path(User.find(job.user_id)), class: "post_user_name" %> (<%= time_ago_in_words(job.created_at) %> ago)</i></p>
-		<h5><strong>Company: </strong><%= job.company %></h5>
-		<!-- only print first 10 words of the job description -->
-		<h5><strong>Description Snippet: </strong><%= job.description.split(" ").slice(0,10).join(" ") %>... <%= link_to "learn more", job_path(job), class: "learn_more" %>.</h5>
-		<hr>
+	<div class="indeed_search text-center">
+		<%= form_tag(root_path, method: :get, class: "form-inline") do %>
+			<div class="form-group">
+				<%= text_field_tag :q, nil, class: "form-control", placeholder: "Job Title or Keywords", autofocus: true %>
+			</div>
+			<div class="form-group">
+				<%= text_field_tag :l, nil, class: "form-control", placeholder: "City, State or Zipcode", autofocus: true %>
+			</div>
+			<div class="form-group">
+				<%= submit_tag "Indeed Search", class: "btn btn-success" %>
+			</div>
+		</div>
+		<% end %>
+	<% if @jobs.any? %>
+		<!-- if there are any job posted belong to this catetory, list them -->
+		<% @jobs.each do |job| %>
+		  <h3><%= link_to job.title, job_path(job), class: "index_job_title" %></h3>
+		  <p><i><%= job.category.name %> - Posted by: <%= link_to User.find(job.user_id).first_name, user_path(User.find(job.user_id)), class: "post_user_name" %> (<%= time_ago_in_words(job.created_at) %> ago)</i></p>
+			<h5><strong>Company: </strong><%= job.company %></h5>
+			<!-- only print first 10 words of the job description -->
+			<h5><strong>Description Snippet: </strong><%= job.description.split(" ").slice(0,10).join(" ") %>... <%= link_to "learn more", job_path(job), class: "learn_more" %>.</h5>
+			<hr>
+		<% end %>
+	<% else %>
+		<!-- show this message if no jost posted in this category  -->
+		<h2 class="text-center">There aren't any jobs posted yet!</h2>
 	<% end %>
-<% else %>
-	<!-- show this message if no jost posted in this category  -->
-	<h2 class="text-center">There aren't any jobs posted yet!</h2>
-<% end %>
 
-<div class="pagination_holder text-center">
-	<%= will_paginate @jobs, renderer: BootstrapPagination::Rails %>
-</div>
+	<div class="pagination_holder text-center">
+		<%= will_paginate @jobs, renderer: BootstrapPagination::Rails %>
+	</div>
+
+<% end %>
 
 

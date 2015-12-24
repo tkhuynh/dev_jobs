@@ -2,16 +2,21 @@ class JobsController < ApplicationController
 	before_action :find_job, only: [:show, :edit, :update, :destroy]
 
   def index
-    # if user don't click on filter link
-  	if params[:category].blank?
-  		@jobs = Job.all.order("created_at DESC").paginate(page: params[:page], per_page: 5)
-  	else 
-      # when user click on filter link
-      # find category chosen then get the category_id
-  		@category_id = Category.find_by(name: params[:category]).id
-      # filter the job base on categery_id
-  		@jobs = Job.where(category_id: @category_id).order("created_at DESC").paginate(page: params[:page], per_page: 5)
-  	end
+    if params[:q]. present?
+      @search = true
+      @jobs = IndeedAPI.search_jobs(q: params[:q], l: params[:l]).results
+    else
+      # if user don't click on filter link
+    	if params[:category].blank?
+    		@jobs = Job.all.order("created_at DESC").paginate(page: params[:page], per_page: 5)
+    	else 
+        # when user click on filter link
+        # find category chosen then get the category_id
+    		@category_id = Category.find_by(name: params[:category]).id
+        # filter the job base on categery_id
+    		@jobs = Job.where(category_id: @category_id).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+    	end
+    end
   end
 
   def show
