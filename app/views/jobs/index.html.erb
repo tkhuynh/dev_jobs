@@ -1,5 +1,34 @@
+<div class="text-center">
+	<% if !@category_id and !@search%> 
+		<!-- show "Job Bulletin" as title in as default or if All Job clicked -->
+		<h1>Job Bulletin</h1>
+	<% elsif @category_id and !@search  %>
+		<!-- show category job as title if user click on category -->
+		<h1><%=  Category.find(@category_id).name %> Jobs</h1>
+	<% elsif @search %>
+		<!-- if an indeed search performed "Indeed Search Results" is the title -->
+		<h1>Indeed Search Results</h1>
+	<% end %>
+</div>
+
+<!-- Indeed Search Engine -->
+<div class="indeed_search text-center">
+	<%= form_tag(root_path, method: :get, class: "form-inline") do %>
+		<div class="form-group">
+			<%= text_field_tag :q, nil, class: "form-control", placeholder: "Job Title or Keywords", autofocus: true %>
+		</div>
+		<div class="form-group">
+			<%= text_field_tag :l, nil, class: "form-control", placeholder: "City, State or Zipcode", autofocus: true %>
+		</div>
+		<div class="form-group">
+			<%= submit_tag "Indeed Search", class: "btn btn-success" %>
+		</div>
+	<% end %>
+</div>
+
 <% if @search %>
-	<h1 class="text-center">Indeed Search Result</h1>
+	<!-- if an Indeed search performed, show search result -->
+	<!-- <h3 class="text-center">Indeed Search Result</h3> -->
 	<% @jobs.each do |job| %>
 		<h3><%=  job.job_title %></h3>
 		<h5><strong>Company: </strong><%= job.company %> - <%=  job.formatted_location_full %></h5>
@@ -7,29 +36,10 @@
 		<h5><strong>Description Snippet: </strong><%= job.snippet %>... <%= link_to "learn more", job.url , class: "learn_more" %>.</h5>
 		<hr>
 	<% end %>
+
 <% else %>
-	<div class="text-center">
-		<% if !@category_id %> 
-			<!-- show "All Jobs" as title if All Job clicked -->
-			<h1>Job Bulletin</h1>
-		<% else  %>
-			<!-- show category job as title -->
-			<h1><%=  Category.find(@category_id).name %> Jobs</h1>
-		<% end %>
-	</div>
-	<div class="indeed_search text-center">
-		<%= form_tag(root_path, method: :get, class: "form-inline") do %>
-			<div class="form-group">
-				<%= text_field_tag :q, nil, class: "form-control", placeholder: "Job Title or Keywords", autofocus: true %>
-			</div>
-			<div class="form-group">
-				<%= text_field_tag :l, nil, class: "form-control", placeholder: "City, State or Zipcode", autofocus: true %>
-			</div>
-			<div class="form-group">
-				<%= submit_tag "Indeed Search", class: "btn btn-success" %>
-			</div>
-		</div>
-		<% end %>
+	
+	<!-- when no search performed show user posted jobs -->
 	<% if @jobs.any? %>
 		<!-- if there are any job posted belong to this catetory, list them -->
 		<% @jobs.each do |job| %>
@@ -40,15 +50,14 @@
 			<h5><strong>Description Snippet: </strong><%= job.description.split(" ").slice(0,10).join(" ") %>... <%= link_to "learn more", job_path(job), class: "learn_more" %>.</h5>
 			<hr>
 		<% end %>
-	<% else %>
-		<!-- show this message if no jost posted in this category  -->
-		<h2 class="text-center">There aren't any jobs posted yet!</h2>
-	<% end %>
-
-	<div class="pagination_holder text-center">
-		<%= will_paginate @jobs, renderer: BootstrapPagination::Rails %>
-	</div>
+		<% else %>
+			<!-- show this message if no jost posted in this category  -->
+			<h2 class="text-center">There aren't any jobs posted yet!</h2>
+		<% end %>
 
 <% end %>
 
+<div class="pagination_holder text-center">
+	<%= will_paginate @jobs, renderer: BootstrapPagination::Rails %>
+</div>
 

@@ -52,3 +52,7 @@ label {
 .user_login_form a, .user_signup_form a, .post_user_name, .learn_more, .mail_to {
 	color: #70d187;
 }
+
+h1 {
+	text-align: text-center;
+}

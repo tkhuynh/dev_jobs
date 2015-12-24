@@ -2,10 +2,16 @@ class JobsController < ApplicationController
 	before_action :find_job, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:q]. present?
+    # if an Indeed search performed show search result in job index view
+    if params[:q]. present? 
       @search = true
-      @jobs = IndeedAPI.search_jobs(q: params[:q], l: params[:l]).results
-    else
+      # see indeed API gem documentation https://github.com/seejohnrun/indeed_api
+      # search result which is @jobs is an Array
+      # will pagination won't work with Array unless we tell Rails to require it
+      # see file config/initializers/will_paginate_array_also.rb
+      @jobs = IndeedAPI.search_jobs(q: params[:q], l: params[:l], limit: 25).results.paginate(page: params[:page], per_page: 5)
+      
+    else # if no Indeed search performed show users posted jobs
       # if user don't click on filter link
     	if params[:category].blank?
     		@jobs = Job.all.order("created_at DESC").paginate(page: params[:page], per_page: 5)
@@ -17,6 +23,7 @@ class JobsController < ApplicationController
     		@jobs = Job.where(category_id: @category_id).order("created_at DESC").paginate(page: params[:page], per_page: 5)
     	end
     end
+
   end
 
   def show
