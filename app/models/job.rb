@@ -7,5 +7,6 @@ class Job < ActiveRecord::Base
 	validates :description, presence: true, length: { minimum: 10 }
 	validates :url, presence: true
 	validates :category_id, presence: true
+	validates :location, presence: true
 
 end

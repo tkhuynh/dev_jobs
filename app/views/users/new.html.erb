@@ -1,8 +1,11 @@
 <div class="containter">
 	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2 user_signup_form">
-			<h1>Sign Up</h1>
+		<div class="col-sm-6 col-sm-offset-3 user_signup_form">
 			<%= form_for @user do |f| %>
+				<div id="slogan" class="text-center">
+					<h3>Looking for a Job?</h3>
+					<h4>Join DevJob Community to find or share jobs.</h4>
+				</div>
 				<div class="form-group">
 					<%=  f.label :first_name %>
 					<%=  f.text_field :first_name, class: "form-control", autofocus: true %>
@@ -24,7 +27,7 @@
 					<%=  f.password_field :password_confirmation, class: "form-control", autofocus: true %>
 				</div>
 				<div class="form-group">
-					<%= f.submit "Sign Up", class: "btn btn-success" %>
+					<%= f.submit "Sign Up", class: "btn btn-primary form-control signup_button" %>
 				</div>
 			<% end %>
 			<p class="text-center">Already have an account? <%= link_to "Click Here", login_path %> to log in.</p>

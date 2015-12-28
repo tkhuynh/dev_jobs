@@ -15,7 +15,7 @@
  *= require_self
  */
 body {
-	background-color: #287f3e;
+	background-color: #F8F8F8;
 	font-family: "Lato", sans-serif;
 }
 
@@ -23,36 +23,55 @@ body {
 	height: 75px;
 	border-radius: 0px;
 	margin-bottom: 0px;
+	background-color: white;
 }
 
 .navbar-default .navbar-brand {
 	font-size: 25px;
   margin-top: 10px;
-  color: #70d187;
 }
 
 .navbar-default .navbar-nav>li>a {
 	margin-top: 10px;
 	font-size: 15px;
-	color: #70d187;
 }
 
 .alert-danger, .alert-info {
 	border-radius: 0px;
 }
 
-label {
-	color: white;
+
+h1 {
+	text-align: text-center;
+}
+
+/*styles for user*/
+.singup_login_page {
+	background: url('http://www.glitch-it.com.au/wp-content/uploads/2015/05/code-background.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: right top;
+	background-attachment: fixed;
+}
+
+h1 {
+	text-align: center;
+}
+
+.user_signup_form, .user_login_form {
+	margin-top: 20px;
+	background: rgb(238, 238, 238);
+	padding: 10px;
+}
+
+.user_login_form {
+	margin-top: 75px;
+}
+
+.user_signup_form h3 {
+	margin-top: 10px;
 }
 
 .user_login_form p, .user_signup_form p {
 	font-size: 18px;
-}
-
-.user_login_form a, .user_signup_form a, .post_user_name, .learn_more, .mail_to {
-	color: #70d187;
-}
-
-h1 {
-	text-align: text-center;
 }

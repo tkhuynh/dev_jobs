@@ -10,7 +10,32 @@
 <%= link_to "Home", jobs_path, class: "btn btn-default" %>
 
 <% if current_user == @user %> 
-	<!-- only show Edit and Delete button in current user file -->
+	<!-- only show Edit and Delete button in current user profile -->
 	<%=  link_to "Edit Profile", edit_user_path(@user), class: "btn btn-default" %>
 	<%=  link_to "Delete Profile", @user, method: :delete, class: "btn btn-default" %>
+<% end %>
+
+<% if @user.jobs.any? %>
+	<!-- show user posted jobs -->
+	<h2>Posted Jobs</h2>
+	<% @user.jobs.each do |job| %>
+		  <h3><%= link_to job.title, job_path(job), class: "index_job_title" %></h3>
+		  <p><i><%= job.category.name %> - Posted by: <%= link_to User.find(job.user_id).first_name, user_path(User.find(job.user_id)), class: "post_user_name" %> (<%= time_ago_in_words(job.created_at) %> ago)</i></p>
+			<h5><strong>Company: </strong><%= job.company %> - <%= job.location %></h5>
+			<!-- only print first 10 words of the job description -->
+			<h5><strong>Description Snippet: </strong><%= job.description.split(" ").slice(0,10).join(" ") %>... <%= link_to "learn more", job_path(job), class: "learn_more" %>.</h5>
+			<% if current_user == @user %>
+			<!-- only show edit and delete button for current user -->
+				<%= link_to "Edit", edit_job_path(job), class: "btn btn-default three-button-group" %>
+				<%= link_to "Delete", job, method: :delete, data: {confirm: "Are You Sure?"}, class: "btn btn-default three-button-group" %>
+			<% end %>
+			<hr>
+		<% end %>
+<% elsif @user.jobs.empty? and current_user == @user %>
+<!-- if current user use the word "You" -->
+	<h3>You haven't posted any jobs yet.</h3>
+	<%= link_to "Add Job", new_job_path, class: "btn btn-default" %>
+<% elsif @user.jobs.empty? and current_user != @user %>
+<!-- if not current user use "This user" -->
+	<h3>This user hasn't posted any jobs yet.</h3>
 <% end %>

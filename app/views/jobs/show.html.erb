@@ -2,9 +2,9 @@
 <p><i><%= @job.category.name %></i></p>
 <h4>Company: <%= @job.company %></h4>
 <p>Job Description: <%= @job.description %></p>
-<%= link_to "Apply for Job", @job.url, class: "btn btn-default" %>
+<%= link_to "Apply for Job", @job.url, class: "btn btn-primary" %>
 <hr>
-<%= link_to "Home", jobs_path, class: "btn btn-default three-button-group" %>
+<%= link_to "Job Bulletin", jobs_path, class: "btn btn-default three-button-group" %>
 
 <% if current_user == @job.user %>
 	<!-- only show edit and delete if the post belongs to current user -->

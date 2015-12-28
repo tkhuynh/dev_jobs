@@ -21,16 +21,17 @@
 			<%= text_field_tag :l, nil, class: "form-control", placeholder: "City, State or Zipcode", autofocus: true %>
 		</div>
 		<div class="form-group">
-			<%= submit_tag "Indeed Search", class: "btn btn-success" %>
+			<%= submit_tag "Indeed Search", class: "btn btn-primary" %>
 		</div>
 	<% end %>
+	<p>jobs by <span><img src="http://www.indeed.com/p/jobsearch.gif" style="border: 0; vertical-align: middle" alt="job search"></span></p>
 </div>
 
 <% if @search %>
 	<!-- if an Indeed search performed, show search result -->
 	<!-- <h3 class="text-center">Indeed Search Result</h3> -->
 	<% @jobs.each do |job| %>
-		<h3><%=  job.job_title %></h3>
+		<h3><%= link_to job.job_title, job.url %></h3>
 		<h5><strong>Company: </strong><%= job.company %> - <%=  job.formatted_location_full %></h5>
 		<h5>Posted: <%= time_ago_in_words(job.date) %> ago.</h5>
 		<h5><strong>Description Snippet: </strong><%= job.snippet %>... <%= link_to "learn more", job.url , class: "learn_more" %>.</h5>
@@ -45,7 +46,7 @@
 		<% @jobs.each do |job| %>
 		  <h3><%= link_to job.title, job_path(job), class: "index_job_title" %></h3>
 		  <p><i><%= job.category.name %> - Posted by: <%= link_to User.find(job.user_id).first_name, user_path(User.find(job.user_id)), class: "post_user_name" %> (<%= time_ago_in_words(job.created_at) %> ago)</i></p>
-			<h5><strong>Company: </strong><%= job.company %></h5>
+			<h5><strong>Company: </strong><%= job.company %> - <%= job.location %></h5>
 			<!-- only print first 10 words of the job description -->
 			<h5><strong>Description Snippet: </strong><%= job.description.split(" ").slice(0,10).join(" ") %>... <%= link_to "learn more", job_path(job), class: "learn_more" %>.</h5>
 			<hr>

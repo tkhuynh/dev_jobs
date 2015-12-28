@@ -34,7 +34,7 @@ class JobsController < ApplicationController
     if current_user
       @job = Job.new
     else
-      flash[:error] = "Please log in to post a job."
+      flash[:error] = "Please signup or login to post a job."
       redirect_to login_path
     end
   end
@@ -67,7 +67,7 @@ class JobsController < ApplicationController
     #prevent non logged in user to edit job
     if current_user == @job.user
     	if @job.update_attributes(job_params)
-        flash[:notice] = "Sucessfully "
+        flash[:notice] = "Sucessfully edited job."
     		redirect_to job_path(@job)
     	else
         flash[:error] = @job.errors.full_messages.join(', ')
@@ -81,6 +81,7 @@ class JobsController < ApplicationController
   def destroy
     if current_user == @job.user
     	@job.destroy
+      flash[:notice] = "Sucessfully deleted your posted job."
     	redirect_to jobs_path
     else
       redirect_to job_path(@job)
@@ -90,7 +91,7 @@ class JobsController < ApplicationController
 private
 	
 	def job_params
-		params.require(:job).permit(:title, :company, :description, :url, :category_id)
+		params.require(:job).permit(:title, :company, :description, :url, :category_id, :location)
 	end
 
 	def find_job
