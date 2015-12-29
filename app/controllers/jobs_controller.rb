@@ -9,7 +9,7 @@ class JobsController < ApplicationController
       # search result which is @jobs is an Array
       # will pagination won't work with Array unless we tell Rails to require it
       # see file config/initializers/will_paginate_array_also.rb
-      job_type = params[:jt].sub!(/\s/, "").downcase #remove space for full time and part time 
+      job_type = params[:jt].sub(/\s/, "") #remove space for full time and part time 
       @jobs = IndeedAPI.search_jobs(q: params[:q], l: params[:l], jt: job_type, limit: 25).results.paginate(page: params[:page], per_page: 5)
       puts job_type
     else # if no Indeed search performed show users posted jobs
@@ -17,8 +17,9 @@ class JobsController < ApplicationController
     	if params[:category].blank?
         if params[:query].present? # if a bulletin search performed
           @bulletin_search = true
-    		  @jobs = Job.search(params[:query], load: true, page: params[:page], per_page: 5)
-          # load: true tells Tire to load the acutal Job ActiveRecord so we can use job.title and so on
+          # search results as records 
+          # https://www.elastic.co/guide/en/elasticsearch/client/ruby-api/current/_activemodel_activerecord.html
+    		  @jobs = Job.search(params[:query]).records.paginate(page: params[:page], per_page: 5)
         else
           @jobs = Job.all.order("created_at DESC").paginate(page: params[:page], per_page: 5)
         end

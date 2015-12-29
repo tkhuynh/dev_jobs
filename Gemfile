@@ -16,7 +16,6 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem 'thin', '~> 1.6', '>= 1.6.4'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'bonsai-elasticsearch-rails', group: :production # for Bonsai plugin on heroku
@@ -39,9 +38,6 @@ gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 
 # indeed API gem
 gem 'indeed_api', '~> 0.0.4'
-
-# tire gem
-gem 'tire', '~> 0.6.2'
 
 # to have the app run on Heroku 
 # https://devcenter.heroku.com/articles/getting-started-with-rails4

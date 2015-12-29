@@ -2,11 +2,9 @@ class Job < ActiveRecord::Base
 	belongs_to :category
 	belongs_to :user
 
-	include Tire::Model::Search # search and indexing method
-  include Tire::Model::Callbacks # callback to update indexing when create, edit or destroy
-  # after adding 2 model above
-  # run command in terminal: rake environment tire:import:all
-  # to index all the jobs
+	# see http://www.rubydoc.info/gems/elasticsearch-model/Elasticsearch/Model/Callbacks
+	include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
 	validates :title, presence: true, length: { minimum: 10 }
 	validates :company, presence: true
@@ -16,3 +14,5 @@ class Job < ActiveRecord::Base
 	validates :location, presence: true
 
 end
+
+Job.import
