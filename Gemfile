@@ -38,6 +38,10 @@ gem 'indeed_api', '~> 0.0.4'
 # tire gem
 gem 'tire', '~> 0.6.2'
 
+# to have the app run on Heroku 
+# https://devcenter.heroku.com/articles/getting-started-with-rails4
+gem 'rails_12factor', group: :production
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
