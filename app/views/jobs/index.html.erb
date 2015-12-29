@@ -15,10 +15,13 @@
 <div class="indeed_search text-center">
 	<%= form_tag(root_path, method: :get, class: "form-inline") do %>
 		<div class="form-group">
-			<%= text_field_tag :q, nil, class: "form-control", placeholder: "Job Title or Keywords", autofocus: true %>
+			<%= text_field_tag :q, nil, class: "form-control", placeholder: "Job Title or Keywords", autofocus: true, required: true %>
 		</div>
 		<div class="form-group">
 			<%= text_field_tag :l, nil, class: "form-control", placeholder: "City, State or Zipcode", autofocus: true %>
+		</div>
+		<div class="form-group">
+			<%= select_tag :jt, options_for_select([ "Full Time", "Part Time", "Contract", "Temporary", "Internship", "Commission" ], "Full Time"), class: "form-control" %>
 		</div>
 		<div class="form-group">
 			<%= submit_tag "Indeed Search", class: "btn btn-primary" %>
@@ -52,8 +55,16 @@
 			<hr>
 		<% end %>
 		<% else %>
-			<!-- show this message if no jost posted in this category  -->
-			<h2 class="text-center">There aren't any jobs posted yet!</h2>
+			<div class="text-center">
+				<% if @bulletin_search %>
+					<!-- when no result found for a bulletin search -->
+					<h2>No jobs in the Bulletin match keyword "<%= params[:query] %>"</h2>
+					<%= link_to "Back to Bulletin", jobs_path %>
+				<% else %>
+					<!-- show this message if no jost posted in this category  -->
+					<h2>There aren't any jobs posted yet!</h2>
+				<% end %>
+			</div>
 		<% end %>
 
 <% end %>

@@ -7,6 +7,8 @@ gem 'rails', '4.2.4'
 gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+# Bootstrap SASS
+gem 'bootstrap-sass', '~> 3.3.6'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -32,6 +34,9 @@ gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 
 # indeed API gem
 gem 'indeed_api', '~> 0.0.4'
+
+# tire gem
+gem 'tire', '~> 0.6.2'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

@@ -10,36 +10,19 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require bootstrap-3.3.6.min
- *= require_tree .
- *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 body {
-	background-color: #F8F8F8;
+	background-color: #fcfcfc;
 	font-family: "Lato", sans-serif;
-}
-
-.navbar-default {
-	height: 75px;
-	border-radius: 0px;
-	margin-bottom: 0px;
-	background-color: white;
-}
-
-.navbar-default .navbar-brand {
-	font-size: 25px;
-  margin-top: 10px;
-}
-
-.navbar-default .navbar-nav>li>a {
-	margin-top: 10px;
-	font-size: 15px;
 }
 
 .alert-danger, .alert-info {
 	border-radius: 0px;
 }
-
 
 h1 {
 	text-align: text-center;

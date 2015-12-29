@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= @singup_login_page ? 'singup_login_page' : ''%>">
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -21,13 +21,32 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><%= link_to "All Jobs", jobs_path %></li>
-					<% Category.all.each do |category| %>
-						<!-- loop to each category -->
-						<!-- sample url http://localhost:3000/jobs?category=Full+Time -->
-						<li><%= link_to category.name, jobs_path(category: category.name) %></li>
-					<% end  %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jobs Category <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "All Jobs", jobs_path %></li>
+              <% Category.all.each do |category| %>
+                <!-- loop to each category -->
+                <!-- sample url http://localhost:3000/jobs?category=Full+Time -->
+                <li><%= link_to category.name, jobs_path(category: category.name) %></li>
+              <% end  %>
+            </ul>
+          </li>
         </ul>
+    
+        <div class="col-sm-3 col-md-3">
+          <%= form_tag jobs_path, method: :get, class: "navbar-form", role: "search" do %>
+            <div class="input-group">
+              <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search Bulletin", autofocus: true %>
+              <div class="input-group-btn">
+                <%= button_tag(type: 'submit', class: "btn btn-default") do %>
+                  <span class="glyphicon glyphicon-search"></span> 
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+      </div>
+
         <ul class="nav navbar-nav navbar-right">
           <li><%=  link_to "Add Job", new_job_path %></li>
           <% if current_user %>
