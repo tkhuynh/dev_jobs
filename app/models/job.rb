@@ -14,5 +14,3 @@ class Job < ActiveRecord::Base
 	validates :location, presence: true
 
 end
-
-Job.import
