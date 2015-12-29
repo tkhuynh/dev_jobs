@@ -19,7 +19,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'thin', '~> 1.6', '>= 1.6.4'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
-gem 'bonsai-elasticsearch-rails'
+gem 'bonsai-elasticsearch-rails', group: :production # for Bonsai plugin on heroku
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
