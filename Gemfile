@@ -17,6 +17,9 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'thin', '~> 1.6', '>= 1.6.4'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+gem 'bonsai-elasticsearch-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
