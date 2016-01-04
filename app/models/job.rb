@@ -6,7 +6,7 @@ class Job < ActiveRecord::Base
 	include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-	validates :title, presence: true, length: { minimum: 10 }
+	validates :title, presence: true
 	validates :company, presence: true
 	validates :description, presence: true, length: { minimum: 10 }
 	validates :url, presence: true

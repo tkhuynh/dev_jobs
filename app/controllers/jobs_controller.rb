@@ -56,7 +56,8 @@ class JobsController < ApplicationController
     		redirect_to job_path(@job)
     	else
         flash[:error] = @job.errors.full_messages.join(', ')
-    		redirect_to new_job_path
+        #if validation failed, still keep the filled out contents
+    		render action: :new
     	end
     else
       redirect_to login_path

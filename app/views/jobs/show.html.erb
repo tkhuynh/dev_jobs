@@ -1,13 +1,15 @@
-<h2><%= @job.title %></h2>
-<p><i><%= @job.category.name %></i></p>
-<h4>Company: <%= @job.company %></h4>
-<p>Job Description: <%= @job.description %></p>
-<%= link_to "Apply for Job", @job.url, class: "btn btn-primary" %>
-<hr>
-<%= link_to "Job Bulletin", jobs_path, class: "btn btn-default three-button-group" %>
+<div class="col-lg-10 col-lg-offset-1">
+	<h2><%= @job.title %></h2>
+	<p><i><%= @job.category.name %></i></p>
+	<h4>Company: <%= @job.company %></h4>
+	<p>Job Description: <%= simple_format @job.description %></p>
+	<%= link_to "Apply for Job", @job.url, class: "btn btn-primary" %>
+	<hr>
+	<%= link_to "Job Bulletin", jobs_path, class: "btn btn-default three-button-group" %>
 
-<% if current_user == @job.user %>
-	<!-- only show edit and delete if the post belongs to current user -->
-	<%= link_to "Edit", edit_job_path(@job), class: "btn btn-default three-button-group" %>
-	<%= link_to "Delete", @job, method: :delete, data: {confirm: "Are You Sure?"}, class: "btn btn-default three-button-group" %>
-<% end %>
+	<% if current_user == @job.user %>
+		<!-- only show edit and delete if the post belongs to current user -->
+		<%= link_to "Edit", edit_job_path(@job), class: "btn btn-default three-button-group" %>
+		<%= link_to "Delete", @job, method: :delete, data: {confirm: "Are You Sure?"}, class: "btn btn-default three-button-group" %>
+	<% end %>
+</div>
